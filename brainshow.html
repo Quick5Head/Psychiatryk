@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>📁 Plik: PEAK</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 30px;
+      text-align: center;
+
+      /* 🔽 Tło graficzne */
+      background-image: url('grafiki/tlo.png'); /* ← zmień nazwę jeśli inna */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed; /* efekt „parallax” */
+    }
+
+    .logo-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+    }
+
+    .logo-link img {
+      width: 80px;
+      transition: transform 0.2s;
+    }
+
+    .logo-link img:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      color: #fff;
+      text-shadow: 1px 1px 3px #000;
+      margin-top: 100px;
+      margin-bottom: 40px;
+    }
+
+    .file {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.9); /* półprzezroczyste tło dla czytelności */
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .file img {
+      margin: 20px 0;
+    }
+
+    .file a img:hover {
+      transform: scale(1.05);
+      transition: transform 0.2s;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Przycisk do strony głównej -->
+  <a href="Psychiatryk.html" class="logo-link">
+    <img src="grafiki/logo.png" alt="Powrót do strony głównej">
+  </a>
+
+  <h1>📁 Plik: BRAIN SHOW</h1>
+
+  <div class="file">
+    <!-- Obraz PEAK -->
+    <img src="grafiki/brainshow.png" alt="Obraz PEAK" width="800">
+
+    <!-- Przycisk POBIERZ -->
+    <a href="https://link-do-folderu" target="_blank">
+      <img src="grafiki/pobierz.png" alt="Pobierz folder" width="200">
+    </a>
+  </div>
+
+</body>
+</html>
