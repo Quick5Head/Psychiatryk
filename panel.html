@@ -2,71 +2,167 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Panel użytkownika | Psychiatryk</title>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyC_TKKrNCbcAC4GOjaj54oRQZQvNR1cCAk",
-      authDomain: "logowanie-f7d27.firebaseapp.com",
-      projectId: "logowanie-f7d27"
-    };
-    firebase.initializeApp(firebaseConfig);
-  </script>
+  <title>Psychiatryk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: url('grafiki/tlo.png') no-repeat center center fixed;
+      margin: 0;
+      padding: 30px;
+      background-image: url('grafiki/tlo.png');
       background-size: cover;
-      color: #fff;
-      text-align: center;
-      padding-top: 100px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
     }
 
-    h1 {
-      font-size: 42px;
+    .header-top {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      z-index: 100;
+    }
+
+    .logo-img {
+      width: 80px;
+      height: auto;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.05);
+    }
+
+    .logo-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 32px;
+      color: #fff;
       text-shadow: 1px 1px 3px #000;
     }
 
-    p {
-      font-size: 20px;
-      margin-top: 10px;
+    h1 {
+      color: #fff;
+      text-shadow: 1px 1px 3px #000;
+      text-align: center;
+      margin-top: 100px;
+      margin-bottom: 40px;
+      font-size: 48px;
     }
 
-    button {
-      margin-top: 30px;
-      background-color: #ff4444;
-      color: white;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 8px;
+    .file-list {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+      max-width: calc(100% - 160px);
+      margin-left: 80px;
+      margin-right: 80px;
+    }
+
+    .file {
+      margin: 30px 0;
+      text-align: left;
+    }
+
+    .file h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .file h3::before {
+      content: "📁";
+      font-size: 24px;
+    }
+
+    .btn {
+      display: inline-block;
       font-weight: bold;
-      cursor: pointer;
+      text-decoration: none;
+      background-color: #0088cc;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      transition: background-color 0.2s;
     }
 
-    button:hover {
-      background-color: #cc0000;
+    .btn:hover {
+      background-color: #0066a8;
+    }
+
+    .footer-bar {
+      margin-top: 60px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .footer-bar a {
+      color: #00bfff;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.2s;
+    }
+
+    .footer-bar a:hover {
+      color: #fff;
     }
   </style>
 </head>
 <body>
 
-  <h1>👋 Witaj w panelu Psychiatryk</h1>
-  <p>Tylko zalogowani użytkownicy widzą tę stronę.</p>
-  <button onclick="logout()">Wyloguj</button>
+  <div class="header-top">
+    <img src="grafiki/logo.png" alt="Logo" class="logo-img">
+    <span class="logo-text">Psychiatryk</span>
+  </div>
 
-  <script>
-    firebase.auth().onAuthStateChanged(user => {
-      if (!user) window.location.href = "login.html";
-    });
+  <h1>📁 Moje pliki</h1>
 
-    function logout() {
-      firebase.auth().signOut().then(() => {
-        window.location.href = "login.html";
-      });
-    }
-  </script>
+  <div class="file-list">
+    <div class="file">
+      <h3>Peak</h3>
+      <a href="peak.html" class="btn">Pobierz</a>
+    </div>
+    <div class="file">
+      <h3>Brain Show</h3>
+      <a href="brainshow.html" class="btn">Pobierz</a>
+    </div>
+    <div class="file">
+      <h3>Pummel Party</h3>
+      <a href="pummelparty.html" class="btn">Pobierz</a>
+    </div>
+    <div class="file">
+      <h3>REPO</h3>
+      <a href="repo.html" class="btn">Pobierz</a>
+    </div>
+    <div class="file">
+      <h3>Schendrule</h3>
+      <a href="schendrule.html" class="btn">Pobierz</a>
+    </div>
+  </div>
+
+  <footer class="footer-bar">
+    <p>📜 <a href="regulamin.html">Regulamin</a> |
+       <a href="polityka.html">Polityka prywatności</a> |
+       <a href="kontakt.html">Kontakt</a> |
+       <a href="o-nas.html">O nas</a>
+    </p>
+  </footer>
 
 </body>
 </html>
