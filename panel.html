@@ -2,10 +2,71 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Panel użytkownika</title>
+  <title>Panel użytkownika | Psychiatryk</title>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "TWOJE_API_KEY",
+      authDomain: "TWOJ_PROJEKT.firebaseapp.com",
+      projectId: "TWOJ_PROJEKT"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('grafiki/tlo.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    h1 {
+      font-size: 42px;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    p {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 30px;
+      background-color: #ff4444;
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #cc0000;
+    }
+  </style>
 </head>
 <body>
-  <h1>👋 Witaj w panelu, admin!</h1>
-  <p>Tu znajdziesz dostęp do plików specjalnych.</p>
+
+  <h1>👋 Witaj w panelu Psychiatryk</h1>
+  <p>Tylko zalogowani użytkownicy widzą tę stronę.</p>
+  <button onclick="logout()">Wyloguj</button>
+
+  <script>
+    firebase.auth().onAuthStateChanged(user => {
+      if (!user) window.location.href = "login.html";
+    });
+
+    function logout() {
+      firebase.auth().signOut().then(() => {
+        window.location.href = "login.html";
+      });
+    }
+  </script>
+
 </body>
 </html>
