@@ -3,7 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>📁 Plik: PUMMEL PARTY</title>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_TKKrNCbcAC4GOjaj54oRQZQvNR1cCAk",
+      authDomain: "logowanie-f7d27.firebaseapp.com",
+      projectId: "logowanie-f7d27"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "login.html"; // ⛔ Brak autoryzacji
+      }
+    });
+  </script>
+
   <style>
+    /* Pozostała część stylu bez zmian */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
