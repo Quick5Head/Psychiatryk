@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Rejestracja | Psychiatryk</title>
 
-  <!-- Firebase SDK v8 -->
+  <!-- Firebase v8 SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script>
@@ -14,73 +14,7 @@
       projectId: "logowanie-f7d27"
     };
     firebase.initializeApp(firebaseConfig);
-  </script>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('grafiki/tlo.png') no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .register-box {
-      background-color: rgba(0,0,0,0.8);
-      padding: 40px;
-      border-radius: 20px;
-      color: #fff;
-      text-align: center;
-      box-shadow: 0 0 20px #000;
-    }
-
-    input {
-      display: block;
-      margin: 12px auto;
-      padding: 10px;
-      width: 260px;
-      border-radius: 8px;
-      border: none;
-      font-size: 16px;
-    }
-
-    button {
-      background-color: #00cc88;
-      color: white;
-      font-weight: bold;
-      padding: 12px 30px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    button:hover {
-      background-color: #009966;
-    }
-
-    .error {
-      color: #ff5c5c;
-      margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="register-box">
-    <h2>📝 Rejestracja</h2>
-    <input type="email" id="email" placeholder="Gmail">
-    <input type="password" id="password" placeholder="Hasło">
-    <input type="password" id="repeat" placeholder="Powtórz hasło">
-    <input type="text" id="code" placeholder="Kod aktywacyjny">
-    <button onclick="register()">Zarejestruj się</button>
-    <div class="error" id="error-msg"></div>
-  </div>
-
-  <script>
     function register() {
       const email = document.getElementById("email").value.trim();
       const pass = document.getElementById("password").value;
@@ -102,13 +36,104 @@
 
       firebase.auth().createUserWithEmailAndPassword(email, pass)
         .then(() => {
-          window.location.href = "login.html";
+          window.location.href = "panel.html";
         })
         .catch(err => {
           error.textContent = "❌ " + err.message;
         });
     }
   </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('grafiki/tlo.png') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .register-box {
+      background-color: rgba(0,0,0,0.85);
+      padding: 60px;
+      border-radius: 30px;
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(0,0,0,0.8);
+      width: 380px;
+    }
+
+    .register-box h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 4px #000;
+    }
+
+    input {
+      display: block;
+      margin: 14px auto;
+      padding: 12px;
+      width: 280px;
+      border-radius: 10px;
+      border: none;
+      font-size: 18px;
+    }
+
+    button {
+      background-color: #00cc88;
+      color: white;
+      font-weight: bold;
+      padding: 14px 36px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 16px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #009966;
+    }
+
+    .login-button {
+      display: inline-block;
+      background-color: #4a5c6a;
+      color: white;
+      font-weight: normal;
+      padding: 6px 16px;
+      margin-top: 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+
+    .login-button:hover {
+      background-color: #3c4e59;
+    }
+
+    .error {
+      color: #ff5c5c;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="register-box">
+    <h2>📝 Rejestracja</h2>
+    <input type="email" id="email" placeholder="Gmail">
+    <input type="password" id="password" placeholder="Hasło">
+    <input type="password" id="repeat" placeholder="Powtórz hasło">
+    <input type="text" id="code" placeholder="Kod aktywacyjny">
+    <button onclick="register()">Zarejestruj się</button>
+    <div class="error" id="error-msg"></div>
+    <a href="login.html" class="login-button">Masz konto? Zaloguj się</a>
+  </div>
 
 </body>
 </html>
