@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>📂 Panel administratora</title>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_TKKrNCbcAC4GOjaj54oRQZQvNR1cCAk",
+      authDomain: "logowanie-f7d27.firebaseapp.com",
+      projectId: "logowanie-f7d27"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    auth.onAuthStateChanged(user => {
+      if (!user || user.email !== "psychiatrykgames@gmail.com") {
+        window.location.href = "login.html"; // 🔒 blokuj dostęp
+      } else {
+        document.getElementById("admin-email").textContent = user.email;
+        loadWnioski();
+      }
+    });
+
+    function logout() {
+      auth.signOut().then(() => window.location.href = "login.html");
+    }
+
+    function loadWnioski() {
+      const list = document.getElementById("wnioski-list");
+      list.innerHTML = "<p>📦 Ładowanie zgłoszeń...</p>";
+
+      db.collection("wnioski").orderBy("timestamp", "desc").get()
+        .then(snapshot => {
+          list.innerHTML = "";
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            const div = document.createElement("div");
+            div.className = "wniosek";
+            div.innerHTML = `
+              <p><strong>📨 Email:</strong> ${data.email}</p>
+              <p><strong>✏️ Wiadomość:</strong><br>${data.tresc}</p>
+              <p><strong>🕒 Czas:</strong> ${new Date(data.timestamp).toLocaleString()}</p>
+              <button onclick="usunWniosek('${doc.id}')">🗑️ Usuń</button>
+              <hr>
+            `;
+            list.appendChild(div);
+          });
+        });
+    }
+
+    function usunWniosek(id) {
+      if (confirm("Czy na pewno chcesz usunąć ten wniosek?")) {
+        db.collection("wnioski").doc(id).delete()
+          .then(() => {
+            alert("🗑️ Wniosek usunięty.");
+            loadWnioski();
+          })
+          .catch(err => alert("❌ Błąd: " + err.message));
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #00bfff;
+      margin-bottom: 20px;
+    }
+
+    .auth-info {
+      background-color: rgba(0,0,0,0.5);
+      padding: 10px 16px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .auth-info button {
+      background-color: #dd4444;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .auth-info button:hover {
+      background-color: #bb3333;
+    }
+
+    .wniosek {
+      background-color: #1f1f1f;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .wniosek button {
+      background-color: #444;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .wniosek button:hover {
+      background-color: #bb3333;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid #444;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📂 Panel administratora</h1>
+
+  <div class="auth-info">
+    <span>Zalogowano jako: <strong id="admin-email">...</strong></span>
+    <button onclick="logout()">Wyloguj</button>
+  </div>
+
+  <div id="wnioski-list">
+    <!-- Tu będą zgłoszenia -->
+  </div>
+
+</body>
+</html>
