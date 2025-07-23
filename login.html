@@ -81,6 +81,23 @@
       background-color: #0066a8;
     }
 
+    .reg-button {
+      display: inline-block;
+      background-color: #00cc88;
+      color: white;
+      font-weight: bold;
+      padding: 10px 24px;
+      margin-top: 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background-color 0.2s;
+    }
+
+    .reg-button:hover {
+      background-color: #009966;
+    }
+
     .error {
       color: #ff5c5c;
       margin-top: 10px;
@@ -95,6 +112,7 @@
     <input type="password" id="password" placeholder="Hasło">
     <button onclick="login()">Zaloguj</button>
     <div class="error" id="error-msg"></div>
+    <a href="register.html" class="reg-button">Nie masz konta? Zarejestruj się</a>
   </div>
 
 </body>
