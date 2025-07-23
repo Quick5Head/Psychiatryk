@@ -9,13 +9,11 @@
       margin: 0;
       padding: 30px;
       text-align: center;
-
-      /* 🔽 Tło graficzne */
-      background-image: url('grafiki/tlo.png'); /* ← zmień nazwę jeśli inna */
+      background-image: url('grafiki/tlo.png');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-      background-attachment: fixed; /* efekt „parallax” */
+      background-attachment: fixed;
     }
 
     .logo-link {
@@ -45,7 +43,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      background-color: rgba(255, 255, 255, 0.9); /* półprzezroczyste tło dla czytelności */
+      background-color: rgba(255, 255, 255, 0.9);
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -61,6 +59,41 @@
       transform: scale(1.05);
       transition: transform 0.2s;
     }
+
+    /* 📋 Styl okna z wymaganiami */
+    .requirements-box {
+      margin: 30px auto 0;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      max-width: 600px;
+    }
+
+    .requirements-box h2 {
+      font-size: 24px;
+      font-family: 'Arial Black', sans-serif;
+      margin-bottom: 15px;
+    }
+
+    .requirements-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .requirements-box li {
+      font-size: 18px;
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .requirements-box li::before {
+      content: "✅";
+      position: absolute;
+      left: 0;
+    }
   </style>
 </head>
 <body>
@@ -73,28 +106,23 @@
   <h1>📁 Plik: PEAK</h1>
 
   <div class="file">
-    <!-- Obraz PEAK -->
     <img src="grafiki/peak.png" alt="Obraz PEAK" width="800">
-
-    <!-- Przycisk POBIERZ -->
     <a href="https://drive.google.com/uc?export=download&id=1zI-BePxhmY5a6EIivsOFZoGG8FrCytaW" target="_blank">
       <img src="grafiki/pobierz.png" alt="Pobierz folder" width="200">
     </a>
   </div>
-  
-  <!-- Wymagania minimalne -->
-<div class="requirements-box">
-  <h2>📋 Wymagania minimalne</h2>
-  <ul>
-    <li>System operacyjny: Windows 10 / macOS 11</li>
-    <li>Procesor: Intel Core i5 / AMD Ryzen 5</li>
-    <li>Pamięć RAM: 8 GB</li>
-    <li>Karta graficzna: NVIDIA GTX 1050 / AMD Radeon RX 560</li>
-    <li>Dysk: 2 GB wolnego miejsca</li>
-    <li>Internet: wymagany do pobrania i aktualizacji</li>
-  </ul>
-</div>
 
+  <div class="requirements-box">
+    <h2>📋 Wymagania minimalne</h2>
+    <ul>
+      <li>System operacyjny: Windows 10 / macOS 11</li>
+      <li>Procesor: Intel Core i5 / AMD Ryzen 5</li>
+      <li>Pamięć RAM: 8 GB</li>
+      <li>Karta graficzna: NVIDIA GTX 1050 / AMD Radeon RX 560</li>
+      <li>Dysk: 2 GB wolnego miejsca</li>
+      <li>Internet: wymagany do pobrania i aktualizacji</li>
+    </ul>
+  </div>
 
 </body>
 </html>
