@@ -16,10 +16,21 @@
     firebase.initializeApp(firebaseConfig);
 
     firebase.auth().onAuthStateChanged(user => {
+      const logoLink = document.querySelector(".logo-link");
+
       if (!user) {
-        window.location.href = "login.html"; // ⛔ Przekierowanie
+        window.location.href = "login.html";
+      } else {
+        document.getElementById("user-email").textContent = user.email;
+        logoLink.setAttribute("href", "panel.html");
       }
     });
+
+    function logout() {
+      firebase.auth().signOut()
+        .then(() => window.location.href = "login.html")
+        .catch(err => alert("Błąd wylogowania: " + err.message));
+    }
   </script>
 
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
@@ -50,6 +61,34 @@
 
     .logo-link img:hover {
       transform: scale(1.10);
+    }
+
+    .auth-info {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #fff;
+      font-size: 15px;
+      background-color: rgba(0,0,0,0.5);
+      padding: 10px 14px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .auth-info button {
+      background-color: #dd4444;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .auth-info button:hover {
+      background-color: #bb3333;
     }
 
     h1 {
@@ -121,11 +160,16 @@
 </head>
 <body>
 
-  <h1>📁 Plik: BRAIN SHOW</h1>
-
-  <a href="panel.html" class="logo-link">
-    <img src="grafiki/logo.png" alt="Powrót do strony głównej">
+  <a class="logo-link" href="#">
+    <img src="grafiki/logo.png" alt="Powrót do panelu">
   </a>
+
+  <div class="auth-info">
+    <span>Zalogowano jako: <strong id="user-email">...</strong></span>
+    <button onclick="logout()">Wyloguj</button>
+  </div>
+
+  <h1>📁 Plik: BRAIN SHOW</h1>
 
   <div class="file">
     <img src="grafiki/brainshow.png" alt="Obraz BRAIN SHOW" width="800">
