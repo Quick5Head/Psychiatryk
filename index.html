@@ -2,167 +2,58 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Psychiatryk</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <title>Psychiatryk | Strona główna</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 30px;
-      background-image: url('grafiki/tlo.png');
+      font-family: Arial, sans-serif;
+      background: url('grafiki/tlo.png') no-repeat center center fixed;
       background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-attachment: fixed;
-    }
-
-    .header-top {
-      position: absolute;
-      top: 20px;
-      left: 20px;
+      height: 100vh;
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 15px;
-      z-index: 100;
     }
 
-    .logo-img {
-      width: 80px;
-      height: auto;
-      transition: transform 0.2s ease-in-out;
-    }
-
-    .logo-img:hover {
-      transform: scale(1.05);
-    }
-
-    .logo-text {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 32px;
+    .container {
+      background-color: rgba(0,0,0,0.8);
+      padding: 60px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #000;
+      text-align: center;
       color: #fff;
-      text-shadow: 1px 1px 3px #000;
     }
 
     h1 {
-      color: #fff;
-      text-shadow: 1px 1px 3px #000;
-      text-align: center;
-      margin-top: 100px;
-      margin-bottom: 40px;
-      font-size: 48px;
+      font-size: 36px;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 5px #000;
     }
 
-    .file-list {
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-      max-width: calc(100% - 160px);
-      margin-left: 80px;
-      margin-right: 80px;
-    }
-
-    .file {
-      margin: 30px 0;
-      text-align: left;
-    }
-
-    .file h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 28px;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-
-    .file h3::before {
-      content: "📁";
-      font-size: 24px;
-    }
-
-    .btn {
+    a.button {
       display: inline-block;
-      font-weight: bold;
-      text-decoration: none;
       background-color: #0088cc;
       color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
+      font-weight: bold;
+      padding: 14px 32px;
+      margin: 10px;
+      border-radius: 10px;
+      text-decoration: none;
       transition: background-color 0.2s;
     }
 
-    .btn:hover {
+    a.button:hover {
       background-color: #0066a8;
-    }
-
-    .footer-bar {
-      margin-top: 60px;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      font-size: 16px;
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .footer-bar a {
-      color: #00bfff;
-      text-decoration: none;
-      margin: 0 10px;
-      transition: color 0.2s;
-    }
-
-    .footer-bar a:hover {
-      color: #fff;
     }
   </style>
 </head>
 <body>
 
-  <div class="header-top">
-    <img src="grafiki/logo.png" alt="Logo" class="logo-img">
-    <span class="logo-text">Psychiatryk</span>
+  <div class="container">
+    <h1>🔐 Witamy w Psychiatryk</h1>
+    <a href="register.html" class="button">Zarejestruj się</a>
+    <a href="login.html" class="button">Zaloguj</a>
   </div>
-
-  <h1>📁 Moje pliki</h1>
-
-  <div class="file-list">
-    <div class="file">
-      <h3>Peak</h3>
-      <a href="peak.html" class="btn">Pobierz</a>
-    </div>
-    <div class="file">
-      <h3>Brain Show</h3>
-      <a href="brainshow.html" class="btn">Pobierz</a>
-    </div>
-    <div class="file">
-      <h3>Pummel Party</h3>
-      <a href="pummelparty.html" class="btn">Pobierz</a>
-    </div>
-    <div class="file">
-      <h3>REPO</h3>
-      <a href="repo.html" class="btn">Pobierz</a>
-    </div>
-    <div class="file">
-      <h3>Schendrule</h3>
-      <a href="schendrule.html" class="btn">Pobierz</a>
-    </div>
-  </div>
-
-  <footer class="footer-bar">
-    <p>📜 <a href="regulamin.html">Regulamin</a> |
-       <a href="polityka.html">Polityka prywatności</a> |
-       <a href="kontakt.html">Kontakt</a> |
-       <a href="o-nas.html">O nas</a>
-    </p>
-  </footer>
 
 </body>
 </html>
