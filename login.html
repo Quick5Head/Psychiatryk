@@ -1,25 +1,101 @@
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Logowanie | Psychiatryk</title>
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyC_TKKrNCbcAC4GOjaj54oRQZQvNR1cCAk",
-    authDomain: "logowanie-f7d27.firebaseapp.com",
-    projectId: "logowanie-f7d27"
-  };
+  <!-- Firebase v8 SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_TKKrNCbcAC4GOjaj54oRQZQvNR1cCAk",
+      authDomain: "logowanie-f7d27.firebaseapp.com",
+      projectId: "logowanie-f7d27"
+    };
+    firebase.initializeApp(firebaseConfig);
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+    function login() {
+      const email = document.getElementById("email").value;
+      const pass = document.getElementById("password").value;
+      const error = document.getElementById("error-msg");
 
-  window.login = function () {
-    const email = document.getElementById("email").value;
-    const pass = document.getElementById("password").value;
-    const error = document.getElementById("error-msg");
+      firebase.auth().signInWithEmailAndPassword(email, pass)
+        .then(() => {
+          window.location.href = "panel.html";
+        })
+        .catch(err => {
+          error.textContent = "❌ " + err.message;
+        });
+    }
+  </script>
 
-    signInWithEmailAndPassword(auth, email, pass)
-      .then(() => window.location.href = "panel.html")
-      .catch(err => {
-        error.textContent = "❌ " + err.message;
-      });
-  };
-</script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('grafiki/tlo.png') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #000;
+      color: #fff;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      display: block;
+      margin: 12px auto;
+      padding: 10px;
+      width: 240px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #0088cc;
+      color: white;
+      font-weight: bold;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #0066a8;
+    }
+
+    .error {
+      color: #ff5c5c;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>🔐 Zaloguj się</h2>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Hasło">
+    <button onclick="login()">Zaloguj</button>
+    <div class="error" id="error-msg"></div>
+  </div>
+
+</body>
+</html>
