@@ -6,6 +6,7 @@
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
   <script>
@@ -14,8 +15,25 @@
       authDomain: "logowanie-f7d27.firebaseapp.com",
       projectId: "logowanie-f7d27"
     };
+
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+
+    // Wymuszenie logowania
+    firebase.auth().onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "login.html"; // ⛔ Brak logowania — przekieruj
+      } else {
+        document.getElementById("user-email").textContent = user.email;
+      }
+    });
+
+    // Wyloguj
+    function logout() {
+      firebase.auth().signOut()
+        .then(() => window.location.href = "login.html")
+        .catch(error => alert("❌ Błąd wylogowania: " + error.message));
+    }
 
     function sendForm(event) {
       event.preventDefault();
@@ -23,6 +41,13 @@
       const email = event.target.email.value;
       const wiadomosc = event.target.wiadomosc.value;
       const timestamp = new Date().toISOString();
+
+      const user = firebase.auth().currentUser;
+
+      if (!user) {
+        alert("❌ Musisz być zalogowany, aby wysłać zgłoszenie.");
+        return;
+      }
 
       db.collection("wnioski").add({
         email: email,
@@ -53,9 +78,36 @@
       text-align: center;
     }
 
+    .auth-info {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .auth-info button {
+      background-color: #dd4444;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .auth-info button:hover {
+      background-color: #bb3333;
+    }
+
     form {
       max-width: 600px;
-      margin: 0 auto;
+      margin: 80px auto 0;
       background-color: #1f1f1f;
       padding: 20px;
       border-radius: 12px;
@@ -91,6 +143,11 @@
   </style>
 </head>
 <body>
+
+  <div class="auth-info">
+    <span>Zalogowano jako: <strong id="user-email">...</strong></span>
+    <button onclick="logout()">Wyloguj</button>
+  </div>
 
   <h1>📩 Formularz kontaktowy</h1>
 
