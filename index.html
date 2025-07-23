@@ -15,10 +15,9 @@
     };
     firebase.initializeApp(firebaseConfig);
 
-    // Sprawdź czy użytkownik jest zalogowany
     firebase.auth().onAuthStateChanged(user => {
       if (!user) {
-        window.location.href = "login.html"; // ⛔ Brak autoryzacji
+        window.location.href = "login.html";
       }
     });
   </script>
@@ -33,6 +32,19 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
+    }
+
+    .logo-img {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 80px;
+      transition: transform 0.2s ease;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.05);
     }
 
     .container {
@@ -68,6 +80,8 @@
   </style>
 </head>
 <body>
+
+  <img src="grafiki/logo.png" alt="Logo" class="logo-img">
 
   <div class="container">
     <h1>🔐 Witamy w Psychiatryk</h1>
