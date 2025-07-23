@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>📩 Kontakt | Psychiatryk</title>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_TKKrNCbcAC4GOjaj54oRQZQvNR1cCAk",
+      authDomain: "logowanie-f7d27.firebaseapp.com",
+      projectId: "logowanie-f7d27"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    function sendForm(event) {
+      event.preventDefault();
+
+      const email = event.target.email.value;
+      const wiadomosc = event.target.wiadomosc.value;
+      const timestamp = new Date().toISOString();
+
+      db.collection("wnioski").add({
+        email: email,
+        tresc: wiadomosc,
+        timestamp: timestamp
+      })
+      .then(() => {
+        alert("✅ Wiadomość została wysłana!");
+        document.getElementById("kontakt-form").reset();
+      })
+      .catch(error => {
+        alert("❌ Błąd zapisu: " + error.message);
+      });
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+
+    h1 {
+      color: #00bfff;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #1f1f1f;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: #2a2a2a;
+      color: #fff;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #aaa;
+    }
+
+    button {
+      background-color: #00bfff;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0088cc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📩 Formularz kontaktowy</h1>
+
+  <form id="kontakt-form" onsubmit="sendForm(event)">
+    <input type="email" name="email" placeholder="Twój adres e-mail" required>
+    <textarea name="wiadomosc" placeholder="Treść wiadomości" rows="6" required></textarea>
+    <button type="submit">Wyślij</button>
+  </form>
+
+</body>
+</html>
