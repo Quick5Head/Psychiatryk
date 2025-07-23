@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Logowanie</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: url('grafiki/tlo.png') center/cover no-repeat fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-box {
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #000;
+      color: #fff;
+      text-align: center;
+    }
+
+    input {
+      display: block;
+      margin: 15px auto;
+      padding: 10px;
+      width: 250px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #0088cc;
+      color: white;
+      font-weight: bold;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #0066a8;
+    }
+
+    .error {
+      color: #ff6666;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>🔐 Zaloguj się</h2>
+    <input type="text" id="username" placeholder="Login">
+    <input type="password" id="password" placeholder="Hasło">
+    <button onclick="checkLogin()">Zaloguj</button>
+    <div class="error" id="error-msg"></div>
+  </div>
+
+  <script>
+    function checkLogin() {
+      const login = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      const error = document.getElementById("error-msg");
+
+      // 👇 Tu ustawiasz swoje dane
+      if (login === "admin" && pass === "psy123") {
+        window.location.href = "panel.html"; // przekierowanie po zalogowaniu
+      } else {
+        error.textContent = "Niepoprawny login lub hasło";
+      }
+    }
+  </script>
+
+</body>
+</html>
