@@ -16,23 +16,164 @@
     firebase.initializeApp(firebaseConfig);
 
     firebase.auth().onAuthStateChanged(user => {
+      const logoLink = document.querySelector(".logo-link");
+
       if (!user) {
         window.location.href = "login.html";
+      } else {
+        document.getElementById("user-email").textContent = user.email;
+        logoLink.setAttribute("href", "panel.html");
       }
     });
+
+    function logout() {
+      firebase.auth().signOut()
+        .then(() => window.location.href = "login.html")
+        .catch(err => alert("Błąd wylogowania: " + err.message));
+    }
   </script>
 
   <style>
-    /* Twój CSS pozostaje bez zmian */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 30px;
+      text-align: center;
+      background-image: url('grafiki/tlo.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .logo-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+    }
+
+    .logo-img {
+      width: 80px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.10);
+    }
+
+    .auth-info {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #fff;
+      font-size: 15px;
+      background-color: rgba(0,0,0,0.5);
+      padding: 10px 14px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .auth-info button {
+      background-color: #dd4444;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .auth-info button:hover {
+      background-color: #bb3333;
+    }
+
+    h1 {
+      color: #fff;
+      text-shadow: 1px 1px 3px #000;
+      font-size: 48px;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+    .file {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      max-width: 800px;
+      margin: 0 auto;
+      transition: transform 0.3s ease;
+    }
+
+    .file:hover {
+      transform: scale(1.01);
+    }
+
+    .file img {
+      margin: 20px 0;
+    }
+
+    .file a img:hover {
+      transform: scale(1.05);
+      transition: transform 0.2s;
+    }
+
+    .requirements-box {
+      margin: 30px auto 0;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      max-width: 600px;
+    }
+
+    .requirements-box h2 {
+      font-size: 24px;
+      font-family: 'Arial Black', sans-serif;
+      margin-bottom: 15px;
+    }
+
+    .requirements-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .requirements-box li {
+      font-size: 18px;
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .requirements-box li::before {
+      content: "✅";
+      position: absolute;
+      left: 0;
+    }
   </style>
 </head>
 <body>
 
-  <h1>📁 Plik: REPO</h1>
-
-  <a href="panel.html" class="logo-link">
-    <img src="grafiki/logo.png" alt="Powrót do strony głównej" class="logo-img">
+  <a class="logo-link" href="#">
+    <img src="grafiki/logo.png" alt="Powrót do panelu" class="logo-img">
   </a>
+
+  <div class="auth-info">
+    <span>Zalogowano jako: <strong id="user-email">...</strong></span>
+    <button onclick="logout()">Wyloguj</button>
+  </div>
+
+  <h1>📁 Plik: REPO</h1>
 
   <div class="file">
     <img src="grafiki/repo.png" alt="Obraz REPO" width="800">
