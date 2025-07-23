@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Rejestracja | Psychiatryk</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_TKKrNCbcAC4GOjaj54oRQZQvNR1cCAk",
+      authDomain: "logowanie-f7d27.firebaseapp.com",
+      projectId: "logowanie-f7d27"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('grafiki/tlo.png') center/cover no-repeat fixed;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .register-box {
+      background-color: rgba(0,0,0,0.8);
+      padding: 40px;
+      border-radius: 20px;
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 0 20px #000;
+    }
+
+    input {
+      display: block;
+      margin: 12px auto;
+      padding: 10px;
+      width: 240px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #00cc88;
+      color: white;
+      font-weight: bold;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #009966;
+    }
+
+    .error {
+      color: #ff5c5c;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="register-box">
+    <h2>📝 Rejestracja z kodem</h2>
+    <input type="email" id="email" placeholder="Gmail">
+    <input type="text" id="code" placeholder="Kod aktywacyjny">
+    <input type="password" id="password" placeholder="Hasło">
+    <button onclick="register()">Zarejestruj się</button>
+    <div class="error" id="error-msg"></div>
+  </div>
+
+  <script>
+    function register() {
+      const email = document.getElementById("email").value;
+      const code = document.getElementById("code").value.trim();
+      const pass = document.getElementById("password").value;
+      const error = document.getElementById("error-msg");
+
+      const expectedCode = "psy2024"; // 🔑 Kod który Ty wysyłasz użytkownikowi
+
+      if (code !== expectedCode) {
+        error.textContent = "❌ Niepoprawny kod aktywacyjny";
+        return;
+      }
+
+      firebase.auth().createUserWithEmailAndPassword(email, pass)
+        .then(() => {
+          window.location.href = "login.html";
+        })
+        .catch(err => {
+          error.textContent = "❌ " + err.message;
+        });
+    }
+  </script>
+
+</body>
+</html>
