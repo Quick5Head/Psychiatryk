@@ -16,11 +16,11 @@
     };
     firebase.initializeApp(firebaseConfig);
 
-    function redirectLogo() {
-      firebase.auth().onAuthStateChanged(user => {
-        window.location.href = user ? "panel.html" : "index.html";
-      });
-    }
+    firebase.auth().onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    });
 
     let currentLang = "pl";
 
@@ -37,25 +37,26 @@
     }
 
     window.addEventListener("load", () => {
-      toggleLanguage();
+      document.getElementById("content-pl").style.display = "block";
     });
   </script>
 
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      margin: 30px;
-      padding-top: 30px;
-      background-color: #121212;
+      padding: 30px;
+      background: url('grafiki/tlo.png') no-repeat center center fixed;
+      background-size: cover;
       color: #fff;
       line-height: 1.7;
-      overflow-x: hidden;
     }
 
     h1 {
       font-size: 36px;
       color: #00bfff;
       margin-bottom: 20px;
+      text-align: center;
     }
 
     h2 {
@@ -99,41 +100,57 @@
     }
 
     .logo-link {
-      position: relative;
-      margin-bottom: 20px;
-      cursor: pointer;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
     }
 
-    .logo-link img {
+    .logo-img {
       width: 80px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.10);
     }
 
     .notice {
       font-size: 14px;
       color: #bbb;
       margin-top: 40px;
+      text-align: center;
     }
 
     @media (max-width: 600px) {
-      h1 { font-size: 26px; }
-      h2 { font-size: 20px; }
-      body { padding-top: 20px; }
+      body {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
 <body>
 
+  <a class="logo-link" href="panel.html">
+    <img src="grafiki/logo.png" alt="Logo Psychiatryk" class="logo-img">
+  </a>
+
   <div class="lang-switch">
     <button id="lang-button" onclick="toggleLanguage()">🌐 Zmień język (EN)</button>
-  </div>
-
-  <div class="logo-link" onclick="redirectLogo()">
-    <img src="grafiki/logo.png" alt="Logo Psychiatryk">
   </div>
 
   <h1 id="header">📜 Regulamin korzystania ze strony Psychiatryk</h1>
 
   <div id="content-pl">
+    <!-- 🇵🇱 Polska wersja regulaminu -->
     <h2>1. Informacje ogólne</h2>
     <p>Strona Psychiatryk udostępnia treści i pliki w celach rozrywkowych oraz edukacyjnych. Korzystanie ze strony oznacza akceptację niniejszego regulaminu.</p>
     <h2>2. Rejestracja i logowanie</h2>
@@ -165,6 +182,7 @@
   </div>
 
   <div id="content-en" style="display: none;">
+    <!-- 🇬🇧 English version -->
     <h2>1. General Information</h2>
     <p>The Psychiatryk website offers content and files for entertainment and educational purposes. Using the site means accepting this policy.</p>
     <h2>2. Registration and Login</h2>
