@@ -3,71 +3,140 @@
 <head>
   <meta charset="UTF-8">
   <title>📁 Plik: Dale & Dawson</title>
-  <link rel="icon" type="image/png" href="grafiki/logo.png">
+  <link rel="icon" type="image/png" href="grafiki/logo64.png">
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_TKKrNCbcAC4GOjaj54oRQZQvNR1cCAk",
+      authDomain: "logowanie-f7d27.firebaseapp.com",
+      projectId: "logowanie-f7d27"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    firebase.auth().onAuthStateChanged(user => {
+      const logoLink = document.querySelector(".logo-link");
+      if (!user) {
+        window.location.href = "login.html";
+      } else {
+        document.getElementById("user-email").textContent = user.email;
+        logoLink.setAttribute("href", "panel.html");
+      }
+    });
+
+    function logout() {
+      firebase.auth().signOut()
+        .then(() => window.location.href = "login.html")
+        .catch(err => alert("Błąd wylogowania: " + err.message));
+    }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
+    body {
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 30px;
+      text-align: center;
       background-image: url('grafiki/tlo.png');
       background-size: cover;
+      background-repeat: no-repeat;
       background-position: center;
       background-attachment: fixed;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-    }
-
-    h1 {
-      font-size: 48px;
-      margin-top: 120px;
-      margin-bottom: 20px;
-      text-align: center;
-      text-shadow: 1px 1px 3px #000;
     }
 
     .logo-link {
       position: absolute;
       top: 20px;
       left: 20px;
-      z-index: 1000;
+      z-index: 100;
     }
 
-    .logo-img {
+    .logo-link img {
       width: 80px;
-      transition: transform 0.2s ease-in-out;
+      transition: transform 0.2s;
     }
 
-    .logo-img:hover {
+    .logo-link img:hover {
       transform: scale(1.10);
     }
 
+    .auth-info {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #fff;
+      font-size: 15px;
+      background-color: rgba(0,0,0,0.5);
+      padding: 10px 14px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .auth-info button {
+      background-color: #dd4444;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .auth-info button:hover {
+      background-color: #bb3333;
+    }
+
+    h1 {
+      color: #fff;
+      text-shadow: 1px 1px 3px #000;
+      font-size: 48px;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
     .file {
-      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.15);
       padding: 30px;
       border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       max-width: 800px;
       margin: 0 auto;
-      text-align: center;
     }
 
     .file img {
       margin: 20px 0;
     }
 
+    .file a img:hover {
+      transform: scale(1.05);
+      transition: transform 0.2s;
+    }
+
     .requirements-box {
       margin: 30px auto 0;
       padding: 20px;
-      background-color: rgba(0,0,0,0.7);
+      background-color: rgba(0, 0, 0, 0.75);
+      color: #fff;
       border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
       max-width: 600px;
     }
 
     .requirements-box h2 {
       font-size: 24px;
+      font-family: 'Arial Black', sans-serif;
       margin-bottom: 15px;
-      text-align: center;
     }
 
     .requirements-box ul {
@@ -76,6 +145,7 @@
     }
 
     .requirements-box li {
+      font-size: 18px;
       margin-bottom: 8px;
       position: relative;
       padding-left: 25px;
@@ -88,13 +158,13 @@
     }
 
     .footer-bar {
+      margin-top: 60px;
       padding: 20px;
       background-color: rgba(0, 0, 0, 0.6);
       color: #fff;
       font-size: 16px;
       text-align: center;
       border-top: 1px solid rgba(255,255,255,0.2);
-      margin-top: 60px;
     }
 
     .footer-bar a {
@@ -119,16 +189,21 @@
 </head>
 <body>
 
-  <a class="logo-link" href="panel.html">
-    <img src="grafiki/logo.png" alt="Logo Psychiatryk" class="logo-img">
+  <a class="logo-link" href="#">
+    <img src="grafiki/logo.png" alt="Powrót do panelu">
   </a>
+
+  <div class="auth-info">
+    <span>Zalogowano jako: <strong id="user-email">...</strong></span>
+    <button onclick="logout()">Wyloguj</button>
+  </div>
 
   <h1>📁 Plik: Dale & Dawson</h1>
 
   <div class="file">
-    <img src="grafiki/Dale&Dawson.png" alt="Dale & Dawson" width="800">
+    <img src="grafiki/Dale&Dawson.png" alt="Obraz Dale & Dawson" width="800">
     <a href="https://drive.google.com/uc?export=download&id=ID_PLIKU" target="_blank">
-      <img src="grafiki/pobierz.png" alt="Pobierz" width="200">
+      <img src="grafiki/pobierz.png" alt="Pobierz folder" width="200">
     </a>
   </div>
 
