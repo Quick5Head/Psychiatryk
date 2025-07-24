@@ -55,7 +55,7 @@
 
     .logo-link img {
       width: 80px;
-      transition: transform 0.2s;
+      transition: transform 0.2s ease-in-out;
     }
 
     .logo-link img:hover {
@@ -74,6 +74,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      z-index: 1000;
     }
 
     .auth-info button {
@@ -160,12 +161,41 @@
       position: absolute;
       left: 0;
     }
+
+    .footer-bar {
+      margin-top: 60px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .footer-bar a {
+      color: #00bfff;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.2s;
+    }
+
+    .footer-bar a:hover {
+      color: #fff;
+    }
+
+    .discord-link {
+      color: #7289da;
+    }
+
+    .discord-link:hover {
+      color: #ffffff;
+    }
   </style>
 </head>
 <body>
 
   <a class="logo-link" href="#">
-    <img src="grafiki/logo.png" alt="Powrót do panelu">
+    <img src="grafiki/logo.png" alt="Powrót do panelu" class="logo-img">
   </a>
 
   <div class="auth-info">
@@ -186,14 +216,15 @@
     <h2>📋 Wymagania minimalne</h2>
     <ul>
       <li>System operacyjny: Windows 10</li>
-      <li>Procesor:  3GHz 4 Rdzenie</li>
+      <li>Procesor: 3GHz 4 Rdzenie</li>
       <li>Pamięć RAM: 8 GB</li>
       <li>Karta graficzna: GeForce GTX 1060 / Radeon RX 580</li>
       <li>Dysk: 8 GB wolnego miejsca</li>
-      <li>64 bitowy procesor i system operacyjny</li>
+      <li>64-bitowy procesor i system operacyjny</li>
       <li>Internet: wymagany do pobrania i aktualizacji</li>
     </ul>
   </div>
+
   <footer class="footer-bar">
     <p>
       📜 <a href="regulamin.html">Regulamin</a> |
