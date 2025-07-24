@@ -25,6 +25,7 @@
         window.location.href = "login.html";
       } else {
         document.getElementById("admin-email").textContent = user.email;
+        document.getElementById("admin-buttons").style.display = "block";
         loadWnioski();
       }
     });
@@ -69,11 +70,19 @@
   </script>
 
   <style>
-    body {
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
       background-color: #121212;
       color: #fff;
-      font-family: Arial, sans-serif;
-      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
       padding: 30px;
     }
 
@@ -110,7 +119,6 @@
       border-radius: 10px;
       font-size: 14px;
       display: flex;
-      justify-content: space-between;
       gap: 12px;
       align-items: center;
       z-index: 1000;
@@ -128,6 +136,29 @@
 
     .auth-info button:hover {
       background-color: #bb3333;
+    }
+
+    #admin-buttons {
+      display: none;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      background-color: #0088cc;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin: 5px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #0066a8;
     }
 
     .wniosek {
@@ -159,7 +190,6 @@
     }
 
     .footer-bar {
-      margin-top: 60px;
       padding: 20px;
       background-color: rgba(0, 0, 0, 0.6);
       color: #fff;
@@ -199,11 +229,17 @@
     <button onclick="logout()">Wyloguj</button>
   </div>
 
-  <h1>📂 Panel administratora</h1>
+  <main>
+    <h1>📂 Panel administratora</h1>
 
-  <div id="wnioski-list">
-    <!-- Tu będą zgłoszenia -->
-  </div>
+    <div id="admin-buttons">
+      <a href="admingra.html" class="btn">➕ Dodaj nową grę</a>
+    </div>
+
+    <div id="wnioski-list">
+      <!-- Tu będą zgłoszenia -->
+    </div>
+  </main>
 
   <footer class="footer-bar">
     <p>
