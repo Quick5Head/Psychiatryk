@@ -5,53 +5,14 @@
   <title>➕ Dodaj nową grę | Psychiatryk</title>
   <link rel="icon" type="image/png" href="grafiki/logo.png">
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyC_TKKrNCbcAC4GOjaj54oRQZQvNR1cCAk",
-      authDomain: "logowanie-f7d27.firebaseapp.com",
-      projectId: "logowanie-f7d27"
-    };
-    firebase.initializeApp(firebaseConfig);
-
-    firebase.auth().onAuthStateChanged(user => {
-      if (!user || user.email !== "psychiatrykgames@gmail.com") {
-        window.location.href = "login.html";
-      } else {
-        document.getElementById("admin-email").textContent = user.email;
-      }
-    });
-
-    function logout() {
-      firebase.auth().signOut()
-        .then(() => window.location.href = "login.html")
-        .catch(err => alert("❌ Błąd wylogowania: " + err.message));
-    }
-
-    function dodajGre(event) {
-      event.preventDefault();
-      const nazwa = event.target.nazwa.value;
-      const grafika = event.target.grafika.value;
-      const link = event.target.link.value;
-      const wymagania = event.target.wymagania.value;
-
-      // 🔧 W tym miejscu mógłby być kod do generowania pliku HTML i wpisu w Firebase
-
-      alert(`🎮 Gra "${nazwa}" przygotowana do dodania!\nPlik graficzny: ${grafika}\nLink: ${link}`);
-      event.target.reset();
-    }
-  </script>
-
   <style>
-    body {
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
       background-color: #121212;
       color: #fff;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 30px;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
@@ -59,7 +20,7 @@
     main {
       flex: 1;
       max-width: 800px;
-      margin: 100px auto 30px;
+      margin: 120px auto 30px;
       background-color: #1f1f1f;
       padding: 40px;
       border-radius: 12px;
@@ -159,6 +120,28 @@
       transform: scale(1.10);
     }
 
+    #html-box {
+      margin-top: 50px;
+    }
+
+    #wynik-html {
+      width: 100%;
+      font-family: monospace;
+      background-color: #101010;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    pre {
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 14px;
+      overflow-x: auto;
+    }
+
     .footer-bar {
       padding: 20px;
       background-color: rgba(0, 0, 0, 0.6);
@@ -187,6 +170,110 @@
       color: #ffffff;
     }
   </style>
+
+  <script>
+    function dodajGre(event) {
+      event.preventDefault();
+      const nazwa = event.target.nazwa.value.trim();
+      const grafika = event.target.grafika.value.trim();
+      const link = event.target.link.value.trim();
+      const wymagania = event.target.wymagania.value.trim();
+
+      generujHTMLDlaGry(nazwa, grafika, link, wymagania);
+    }
+
+    function generujHTMLDlaGry(nazwa, grafika, link, wymagania) {
+      const html = `
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>📁 Plik: ${nazwa}</title>
+  <link rel="icon" type="image/png" href="grafiki/logo.png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 30px;
+      text-align: center;
+      background-image: url('grafiki/tlo.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #fff;
+    }
+    h1 {
+      font-size: 48px;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px #000;
+    }
+    .file {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .file img {
+      margin: 20px 0;
+    }
+    .requirements-box {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: rgba(0,0,0,0.7);
+      border-radius: 12px;
+    }
+    .requirements-box h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+    .requirements-box ul {
+      list-style: none;
+      padding: 0;
+    }
+    .requirements-box li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 25px;
+    }
+    .requirements-box li::before {
+      content: "✅";
+      position: absolute;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📁 Plik: ${nazwa}</h1>
+
+  <div class="file">
+    <img src="grafiki/${grafika}" alt="${nazwa}" width="800">
+    <a href="${link}" target="_blank">
+      <img src="grafiki/pobierz.png" alt="Pobierz" width="200">
+    </a>
+  </div>
+
+  <div class="requirements-box">
+    <h2>📋 Wymagania minimalne</h2>
+    <ul>
+      ${wymagania.split('\n').map(item => `<li>${item}</li>`).join('\n')}
+    </ul>
+  </div>
+
+</body>
+</html>
+      `.trim();
+
+      const fileName = nazwa.toLowerCase().replace(/\s+/g, '') + ".html";
+
+      document.getElementById("wynik-html").value = html;
+      document.getElementById("html-box").style.display = "block";
+      document.getElementById("panel-dodaj").textContent =
+        `<div class="file">\n  <h3>${nazwa}</h3>\n  <a href="${fileName}" class="btn">Pobierz</a>\n</div>`;
+    }
+  </script>
 </head>
 <body>
 
@@ -195,27 +282,40 @@
   </a>
 
   <div class="auth-info">
-    <span>Zalogowano jako: <strong id="admin-email">...</strong></span>
+    <span>Zalogowano jako: <strong id="admin-email">Admin</strong></span>
     <button onclick="logout()">Wyloguj</button>
   </div>
 
   <main>
     <h1>➕ Dodaj nową grę</h1>
     <form onsubmit="dodajGre(event)">
-      <label for="nazwa">🎮 Nazwa gry:</label>
-      <input type="text" id="nazwa" name="nazwa" placeholder="np. Schendrule" required>
+  <label for="nazwa">🎮 Nazwa gry:</label>
+  <input type="text" id="nazwa" name="nazwa" placeholder="np. Schendrule" required>
 
-      <label for="grafika">🖼️ Nazwa pliku z folderu grafiki:</label>
-      <input type="text" id="grafika" name="grafika" placeholder="np. schendrule.png" required>
+  <label for="grafika">🖼️ Nazwa pliku z folderu grafiki:</label>
+  <input type="text" id="grafika" name="grafika" placeholder="np. schendrule.png" required>
 
-      <label for="link">🔗 Link do pobierania:</label>
-      <input type="text" id="link" name="link" placeholder="https://drive.google.com/..." required>
+  <label for="link">🔗 Link do pobierania:</label>
+  <input type="text" id="link" name="link" placeholder="https://..." required>
 
-      <label for="wymagania">📋 Wymagania minimalne:</label>
-      <textarea id="wymagania" name="wymagania" placeholder="System operacyjny: Windows 10&#10;RAM: 8 GB&#10;Procesor: i5..." required></textarea>
+  <label for="wymagania">📋 Wymagania minimalne:</label>
+  <textarea id="wymagania" name="wymagania" placeholder="System: Windows 10
+RAM: 8 GB
+Procesor: 4 rdzenie
+..." required></textarea>
 
-      <button type="submit">✅ Dodaj grę</button>
-    </form>
+  <button type="submit">✅ Dodaj grę</button>
+</form>
+
+<div id="html-box" style="display:none; margin-top: 40px;">
+  <h2>📄 Wygenerowany kod gry (plik .html):</h2>
+  <textarea id="wynik-html" rows="20" style="width:100%; font-family: monospace;" readonly></textarea>
+
+  <p>📌 Skopiuj ten kod jako <strong>[nazwa].html</strong> i wrzuć go do GitHub Pages.</p>
+
+  <p>✏️ W <strong>panel.html</strong> dodaj ten wpis, aby gra pojawiła się w panelu:</p>
+  <pre><code id="panel-dodaj" style="font-family: monospace;"></code></pre>
+</div>
   </main>
 
   <footer class="footer-bar">
