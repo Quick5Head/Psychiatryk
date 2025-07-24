@@ -20,16 +20,17 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // Wymuszenie logowania
     firebase.auth().onAuthStateChanged(user => {
+      const logoLink = document.querySelector(".logo-link");
+
       if (!user) {
-        window.location.href = "login.html"; // ⛔ Brak logowania — przekieruj
+        window.location.href = "login.html";
       } else {
         document.getElementById("user-email").textContent = user.email;
+        logoLink.setAttribute("href", "panel.html");
       }
     });
 
-    // Wyloguj
     function logout() {
       firebase.auth().signOut()
         .then(() => window.location.href = "login.html")
@@ -90,6 +91,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      z-index: 1000;
     }
 
     .auth-info button {
@@ -141,9 +143,29 @@
     button:hover {
       background-color: #0088cc;
     }
+
+    .logo-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .logo-img {
+      width: 80px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.10);
+    }
   </style>
 </head>
 <body>
+
+  <a class="logo-link" href="#">
+    <img src="grafiki/logo.png" alt="Logo Psychiatryk" class="logo-img">
+  </a>
 
   <div class="auth-info">
     <span>Zalogowano jako: <strong id="user-email">...</strong></span>
