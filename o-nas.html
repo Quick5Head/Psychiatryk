@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>👥 O nas | Psychiatryk</title>
+  <link rel="icon" type="image/png" href="grafiki/logo.png">
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_TKKrNCbcAC4GOjaj54oRQZQvNR1cCAk",
+      authDomain: "logowanie-f7d27.firebaseapp.com",
+      projectId: "logowanie-f7d27"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    firebase.auth().onAuthStateChanged(user => {
+      const logoLink = document.querySelector(".logo-link");
+      if (!user) {
+        window.location.href = "login.html";
+      } else {
+        document.getElementById("user-email").textContent = user.email;
+        logoLink.setAttribute("href", "panel.html");
+      }
+    });
+
+    function logout() {
+      firebase.auth().signOut()
+        .then(() => window.location.href = "login.html")
+        .catch(err => alert("❌ Błąd wylogowania: " + err.message));
+    }
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
+      line-height: 1.7;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #00bfff;
+      font-size: 40px;
+      text-align: center;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    h2 {
+      color: #00bfff;
+      font-size: 28px;
+      margin-top: 50px;
+    }
+
+    p, ul {
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    ul li::before {
+      content: "💬 ";
+    }
+
+    a {
+      color: #7289da;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .logo-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .logo-img {
+      width: 80px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.10);
+    }
+
+    .auth-info {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      background-color: rgba(0,0,0,0.6);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      display: flex;
+      gap: 12px;
+      z-index: 1000;
+      align-items: center;
+    }
+
+    .auth-info button {
+      background-color: #dd4444;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .auth-info button:hover {
+      background-color: #bb3333;
+    }
+
+    .footer-bar {
+      margin-top: 60px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .footer-bar a {
+      color: #00bfff;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.2s;
+    }
+
+    .footer-bar a:hover {
+      color: #fff;
+    }
+
+    .discord-link {
+      color: #7289da;
+    }
+
+    .discord-link:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <a class="logo-link" href="#">
+    <img src="grafiki/logo.png" alt="Logo Psychiatryk" class="logo-img">
+  </a>
+
+  <div class="auth-info">
+    <span>Zalogowano jako: <strong id="user-email">...</strong></span>
+    <button onclick="logout()">Wyloguj</button>
+  </div>
+
+  <h1>👥 Kim jesteśmy?</h1>
+
+  <h2>Początki jak z LoL-a</h2>
+  <p>
+    Wszystko zaczęło się od Discorda. Psychiatryk — miejsce, gdzie poważna rozmowa to mit,
+    a memy są walutą. Graliśmy w League of Legends. Przegrywaliśmy. Dużo. Ale wtedy zrodziła się więź.
+  </p>
+
+  <h2>Więcej niż gra</h2>
+  <p>
+    Gdy LoL przestał nas śmieszyć, zaczęliśmy szukać innych gier. Dzieliliśmy się linkami,
+    testowaliśmy dziwne produkcje indie i przypadkowo odkrywaliśmy świetne tytuły. 
+    Ale był jeden problem — nie było gdzie tego zebrać. I wtedy 🐸 Frog pomyślał: "Zrobię stronę".
+  </p>
+
+  <h2>Psychiatryk.pl — nasza piwnica w internecie</h2>
+  <ul>
+    <li>Tu wrzucamy gry, które można pobrać za darmo</li>
+    <li>Tu regulamin nie gryzie (ale sypie tekstem jak terapia grupowa)</li>
+    <li>Tu nikt nie pyta “czy masz życie poza netem” — bo wiadomo że nie</li>
+  </ul>
+
+  <h2>Dla kogo jest ta strona?</h2>
+  <p>
+    Dla ludzi z Discorda. Dla tych, którzy śmieją się z własnej porażki.
+    Dla graczy, którym League of Legends zniszczyło duszę, ale nie humor.
+    Dla wszystkich, którzy potrzebują miejsca, gdzie mogą znaleźć gierkę,
+    wsparcie i odrobinę cyber-chaosu.
+  </p>
+
+  <h2>Kontakt z nami?</h2>
+  <p>
+    Najlepiej przez <a href="discord.html">Discorda</a>, gdzie chaos kwitnie.
+    Ale możesz też napisać przez <a href="kontakt.html">formularz kontaktowy</a> — obiecujemy, że przeczytamy. Kiedyś.
+  </p>
+
+  <footer class="footer-bar">
+    <p>
+      📜 <a href="regulamin.html">Regulamin</a> |
+      <a href="polityka.html">Polityka prywatności</a> |
+      <a href="kontakt.html">Kontakt</a> |
+      <a href="o-nas.html">O nas</a> |
+      <a href="https://discord.gg/5qnemyrNyW" target="_blank" class="discord-link">💬 Discord</a>
+    </p>
+  </footer>
+
+</body>
+</html>
