@@ -15,13 +15,18 @@
       background-position: center;
       background-attachment: fixed;
       color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
+
     h1 {
       font-size: 48px;
       margin-top: 30px;
       margin-bottom: 20px;
       text-shadow: 1px 1px 3px #000;
     }
+
     .file {
       background: rgba(255, 255, 255, 0.1);
       padding: 30px;
@@ -29,32 +34,68 @@
       max-width: 800px;
       margin: 0 auto;
     }
+
     .file img {
       margin: 20px 0;
     }
+
     .requirements-box {
-      margin-top: 30px;
+      margin: 30px auto 0;
       padding: 20px;
       background-color: rgba(0,0,0,0.7);
       border-radius: 12px;
+      max-width: 600px;
     }
+
     .requirements-box h2 {
       font-size: 24px;
       margin-bottom: 15px;
     }
+
     .requirements-box ul {
       list-style: none;
       padding: 0;
     }
+
     .requirements-box li {
       margin-bottom: 8px;
       position: relative;
       padding-left: 25px;
     }
+
     .requirements-box li::before {
       content: "✅";
       position: absolute;
       left: 0;
+    }
+
+    .footer-bar {
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      margin-top: 60px;
+    }
+
+    .footer-bar a {
+      color: #00bfff;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.2s;
+    }
+
+    .footer-bar a:hover {
+      color: #fff;
+    }
+
+    .discord-link {
+      color: #7289da;
+    }
+
+    .discord-link:hover {
+      color: #ffffff;
     }
   </style>
 </head>
@@ -73,13 +114,23 @@
     <h2>📋 Wymagania minimalne</h2>
     <ul>
       <li>System operacyjny: Windows 10</li>
-<li>Procesor: Intel i5 6400</li>
-<li>Pamięć RAM: 8 GB</li>
-<li>Karta graficzna: GTX 960</li>
-<li>Dysk: 2 GB wolnego miejsca</li>
-<li>Internet: wymagany do pobrania i aktualizacji</li>
+      <li>Procesor: Intel i5 6400</li>
+      <li>Pamięć RAM: 8 GB</li>
+      <li>Karta graficzna: GTX 960</li>
+      <li>Dysk: 2 GB wolnego miejsca</li>
+      <li>Internet: wymagany do pobrania i aktualizacji</li>
     </ul>
   </div>
+
+  <footer class="footer-bar">
+    <p>
+      📜 <a href="regulamin.html">Regulamin</a> |
+      <a href="polityka.html">Polityka prywatności</a> |
+      <a href="kontakt.html">Kontakt</a> |
+      <a href="o-nas.html">O nas</a> |
+      <a href="https://discord.gg/5qnemyrNyW" target="_blank" class="discord-link">💬 Discord</a>
+    </p>
+  </footer>
 
 </body>
 </html>
