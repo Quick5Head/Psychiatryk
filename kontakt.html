@@ -22,7 +22,6 @@
 
     firebase.auth().onAuthStateChanged(user => {
       const logoLink = document.querySelector(".logo-link");
-
       if (!user) {
         window.location.href = "login.html";
       } else {
@@ -39,11 +38,9 @@
 
     function sendForm(event) {
       event.preventDefault();
-
       const email = event.target.email.value;
       const wiadomosc = event.target.wiadomosc.value;
       const timestamp = new Date().toISOString();
-
       const user = firebase.auth().currentUser;
 
       if (!user) {
@@ -159,6 +156,35 @@
     .logo-img:hover {
       transform: scale(1.10);
     }
+
+    .footer-bar {
+      margin-top: 60px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .footer-bar a {
+      color: #00bfff;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.2s;
+    }
+
+    .footer-bar a:hover {
+      color: #fff;
+    }
+
+    .discord-link {
+      color: #7289da;
+    }
+
+    .discord-link:hover {
+      color: #ffffff;
+    }
   </style>
 </head>
 <body>
@@ -179,6 +205,16 @@
     <textarea name="wiadomosc" placeholder="Treść wiadomości" rows="6" required></textarea>
     <button type="submit">Wyślij</button>
   </form>
+
+  <footer class="footer-bar">
+    <p>
+      📜 <a href="regulamin.html">Regulamin</a> |
+      <a href="polityka.html">Polityka prywatności</a> |
+      <a href="kontakt.html">Kontakt</a> |
+      <a href="o-nas.html">O nas</a> |
+      <a href="https://discord.gg/5qnemyrNyW" target="_blank" class="discord-link">💬 Discord</a>
+    </p>
+  </footer>
 
 </body>
 </html>
