@@ -7,7 +7,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="grafiki/logo64.png">
 
-  <!-- Firebase SDK -->
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script>
@@ -33,6 +33,7 @@
     body {
       font-family: Arial, sans-serif;
       margin: 30px;
+      padding-top: 120px;
       background-color: #121212;
       color: #fff;
       line-height: 1.7;
@@ -114,12 +115,14 @@
 </head>
 <body>
 
+  <!-- Logo z przekierowaniem -->
   <div class="logo-link" onclick="redirectLogo()">
     <img src="grafiki/logo.png" alt="Psychiatryk">
   </div>
 
+  <!-- Przełącznik języka -->
   <div class="lang-switch">
-    <button onclick="toggleLanguage()">🌐 Zmień język</button>
+    <button id="lang-button" onclick="toggleLanguage()">🌐 Zmień język (EN)</button>
   </div>
 
   <h1 id="header">📜 Regulamin korzystania ze strony Psychiatryk</h1>
@@ -200,6 +203,7 @@
     <p class="notice">© 2025 Psychiatryk. This policy is effective from July 24, 2025.</p>
   </div>
 
+  <!-- Skrypt językowy -->
   <script>
     let currentLang = "pl";
 
@@ -207,11 +211,9 @@
       currentLang = currentLang === "pl" ? "en" : "pl";
       document.getElementById("content-pl").style.display = currentLang === "pl" ? "block" : "none";
       document.getElementById("content-en").style.display = currentLang === "en" ? "block" : "none";
-      document.getElementById("header").textContent = currentLang === "pl" 
-        ? "📜 Regulamin korzystania ze strony Psychiatryk" 
+      document.getElementById("header").textContent = currentLang === "pl"
+        ? "📜 Regulamin korzystania ze strony Psychiatryk"
         : "📜 Terms of Use | Psychiatryk";
-    }
-  </script>
-
-</body>
-</html>
+      document.getElementById("lang-button").textContent = currentLang === "pl"
+        ? "🌐 Zmień język (EN)"
+        : "🌐 Z
