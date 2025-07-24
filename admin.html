@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>📂 Panel administratora</title>
+  <link rel="icon" type="image/png" href="grafiki/logo.png">
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -21,7 +22,7 @@
 
     auth.onAuthStateChanged(user => {
       if (!user || user.email !== "psychiatrykgames@gmail.com") {
-        window.location.href = "login.html"; // 🔒 blokuj dostęp
+        window.location.href = "login.html";
       } else {
         document.getElementById("admin-email").textContent = user.email;
         loadWnioski();
@@ -72,22 +73,47 @@
       background-color: #121212;
       color: #fff;
       font-family: Arial, sans-serif;
+      margin: 0;
       padding: 30px;
     }
 
     h1 {
       color: #00bfff;
       margin-bottom: 20px;
+      text-align: center;
+      margin-top: 80px;
+      font-size: 36px;
+    }
+
+    .logo-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .logo-img {
+      width: 80px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.10);
     }
 
     .auth-info {
+      position: fixed;
+      top: 20px;
+      right: 30px;
       background-color: rgba(0,0,0,0.5);
       padding: 10px 16px;
       border-radius: 10px;
-      margin-bottom: 30px;
+      font-size: 14px;
       display: flex;
       justify-content: space-between;
+      gap: 12px;
       align-items: center;
+      z-index: 1000;
     }
 
     .auth-info button {
@@ -109,6 +135,7 @@
       padding: 20px;
       border-radius: 12px;
       margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
 
     .wniosek button {
@@ -130,20 +157,63 @@
       border-top: 1px solid #444;
       margin-top: 20px;
     }
+
+    .footer-bar {
+      margin-top: 60px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .footer-bar a {
+      color: #00bfff;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.2s;
+    }
+
+    .footer-bar a:hover {
+      color: #fff;
+    }
+
+    .discord-link {
+      color: #7289da;
+    }
+
+    .discord-link:hover {
+      color: #ffffff;
+    }
   </style>
 </head>
 <body>
 
-  <h1>📂 Panel administratora</h1>
+  <a class="logo-link" href="panel.html">
+    <img src="grafiki/logo.png" alt="Logo Psychiatryk" class="logo-img">
+  </a>
 
   <div class="auth-info">
     <span>Zalogowano jako: <strong id="admin-email">...</strong></span>
     <button onclick="logout()">Wyloguj</button>
   </div>
 
+  <h1>📂 Panel administratora</h1>
+
   <div id="wnioski-list">
     <!-- Tu będą zgłoszenia -->
   </div>
+
+  <footer class="footer-bar">
+    <p>
+      📜 <a href="regulamin.html">Regulamin</a> |
+      <a href="polityka.html">Polityka prywatności</a> |
+      <a href="kontakt.html">Kontakt</a> |
+      <a href="o-nas.html">O nas</a> |
+      <a href="https://discord.gg/5qnemyrNyW" target="_blank" class="discord-link">💬 Discord</a>
+    </p>
+  </footer>
 
 </body>
 </html>
