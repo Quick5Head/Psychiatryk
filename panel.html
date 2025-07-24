@@ -20,6 +20,14 @@
         window.location.href = "login.html";
       } else {
         document.getElementById("user-email").textContent = user.email;
+
+        // 🛡️ Admin checker
+        const adminEmails = ["admin@psychiatryk.pl", "frog@psychiatryk.pl"];
+        const adminPanelButton = document.getElementById("admin-panel");
+
+        if (adminEmails.includes(user.email)) {
+          adminPanelButton.style.display = "block";
+        }
       }
     });
 
@@ -156,6 +164,12 @@
       background-color: #0066a8;
     }
 
+    #admin-panel {
+      text-align: center;
+      margin-bottom: 40px;
+      display: none;
+    }
+
     .footer-bar {
       margin-top: 60px;
       padding: 20px;
@@ -201,6 +215,10 @@
   </div>
 
   <h1>📁 Pliki</h1>
+
+  <div id="admin-panel">
+    <a href="admin.html" class="btn">Panel administratora</a>
+  </div>
 
   <div class="file-list">
     <div class="file">
