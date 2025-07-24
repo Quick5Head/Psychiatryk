@@ -5,11 +5,11 @@
   <title>📁 Plik: Dale & Dawson</title>
   <link rel="icon" type="image/png" href="grafiki/logo.png">
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    html, body {
+      height: 100%;
       margin: 0;
-      padding: 30px;
-      text-align: center;
+      padding: 0;
+      font-family: Arial, sans-serif;
       background-image: url('grafiki/tlo.png');
       background-size: cover;
       background-position: center;
@@ -17,14 +17,30 @@
       color: #fff;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
     }
 
     h1 {
       font-size: 48px;
-      margin-top: 30px;
+      margin-top: 120px;
       margin-bottom: 20px;
+      text-align: center;
       text-shadow: 1px 1px 3px #000;
+    }
+
+    .logo-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .logo-img {
+      width: 80px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.10);
     }
 
     .file {
@@ -33,6 +49,7 @@
       border-radius: 20px;
       max-width: 800px;
       margin: 0 auto;
+      text-align: center;
     }
 
     .file img {
@@ -50,6 +67,7 @@
     .requirements-box h2 {
       font-size: 24px;
       margin-bottom: 15px;
+      text-align: center;
     }
 
     .requirements-box ul {
@@ -100,6 +118,10 @@
   </style>
 </head>
 <body>
+
+  <a class="logo-link" href="panel.html">
+    <img src="grafiki/logo.png" alt="Logo Psychiatryk" class="logo-img">
+  </a>
 
   <h1>📁 Plik: Dale & Dawson</h1>
 
