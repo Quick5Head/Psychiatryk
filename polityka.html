@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>🔐 Polityka prywatności | Psychiatryk</title>
+  <link rel="icon" type="image/png" href="grafiki/logo.png">
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_TKKrNCbcAC4GOjaj54oRQZQvNR1cCAk",
+      authDomain: "logowanie-f7d27.firebaseapp.com",
+      projectId: "logowanie-f7d27"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    firebase.auth().onAuthStateChanged(user => {
+      const logoLink = document.querySelector(".logo-link");
+      if (!user) {
+        window.location.href = "login.html";
+      } else {
+        logoLink.setAttribute("href", "panel.html");
+      }
+    });
+
+    function logout() {
+      firebase.auth().signOut()
+        .then(() => window.location.href = "login.html")
+        .catch(err => alert("❌ Błąd wylogowania: " + err.message));
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      line-height: 1.7;
+    }
+
+    h1 {
+      color: #00bfff;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-top: 40px;
+      color: #00bfff;
+    }
+
+    p, ul {
+      margin-bottom: 20px;
+    }
+
+    a {
+      color: #7289da;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .logo-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .logo-img {
+      width: 80px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.10);
+    }
+
+    .auth-info {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 1000;
+    }
+
+    .auth-info button {
+      background-color: #dd4444;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .auth-info button:hover {
+      background-color: #bb3333;
+    }
+
+    .notice {
+      font-size: 14px;
+      color: #bbb;
+      text-align: center;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <a class="logo-link" href="#">
+    <img src="grafiki/logo.png" alt="Logo Psychiatryk" class="logo-img">
+  </a>
+
+  <div class="auth-info">
+    <span>Zalogowano jako: <strong id="user-email">...</strong></span>
+    <button onclick="logout()">Wyloguj</button>
+  </div>
+
+  <h1>🔐 Polityka prywatności</h1>
+
+  <h2>1. Dane zbierane podczas rejestracji</h2>
+  <p>Podczas zakładania konta prosimy o podanie adresu e-mail oraz hasła. Te dane są niezbędne do identyfikacji użytkownika i umożliwienia mu dostępu do panelu.</p>
+
+  <h2>2. Sposób przetwarzania danych</h2>
+  <p>Dane są przetwarzane wyłącznie w celu umożliwienia logowania i korzystania z funkcji strony. Nie są udostępniane osobom trzecim, z wyjątkiem przypadków wymaganych prawem.</p>
+
+  <h2>3. Przechowywanie danych</h2>
+  <p>Dane użytkowników są bezpiecznie przechowywane za pośrednictwem platformy Firebase Authentication. Psychiatryk nie gromadzi haseł ani danych wrażliwych poza Firebase.</p>
+
+  <h2>4. Pliki kontaktowe</h2>
+  <p>Wiadomości przesyłane przez formularz kontaktowy są zapisywane wraz z adresem e-mail oraz datą przesłania. Służą one wyłącznie do celów obsługi zgłoszeń.</p>
+
+  <h2>5. Prawa użytkownika</h2>
+  <ul>
+    <li>Masz prawo do wglądu w swoje dane.</li>
+    <li>Możesz poprosić o ich edycję lub usunięcie.</li>
+    <li>W razie pytań skontaktuj się z nami przez formularz kontaktowy.</li>
+  </ul>
+
+  <h2>6. Zmiany w polityce prywatności</h2>
+  <p>Polityka może być aktualizowana wraz z rozwojem serwisu. Zmiany będą publikowane na tej stronie. Zachęcamy do regularnego sprawdzania zapisów.</p>
+
+  <p class="notice">© 2025 Psychiatryk. Polityka obowiązuje od 24 lipca 2025.</p>
+
+</body>
+</html>
