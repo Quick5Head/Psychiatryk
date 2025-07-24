@@ -49,6 +49,7 @@
       background-color: #121212;
       color: #fff;
       line-height: 1.7;
+      overflow-x: hidden;
     }
 
     h1 {
@@ -80,7 +81,7 @@
       position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 999;
+      z-index: 1000;
     }
 
     .lang-switch button {
@@ -101,14 +102,17 @@
       position: fixed;
       top: 20px;
       left: 20px;
-      z-index: 999;
+      z-index: 1000;
       cursor: pointer;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      will-change: transform;
     }
 
     .logo-link img {
       width: 80px;
       transition: transform 0.2s;
-      will-change: transform;
+      transform-origin: center center;
     }
 
     .logo-link img:hover {
@@ -149,7 +153,6 @@
 
   <h1 id="header">📜 Regulamin korzystania ze strony Psychiatryk</h1>
 
-  <!-- Polski -->
   <div id="content-pl">
     <h2>1. Informacje ogólne</h2>
     <p>Strona Psychiatryk udostępnia treści i pliki w celach rozrywkowych oraz edukacyjnych. Korzystanie ze strony oznacza akceptację niniejszego regulaminu.</p>
@@ -181,7 +184,6 @@
     <p class="notice">© 2025 Psychiatryk. Regulamin obowiązuje od 24 lipca 2025.</p>
   </div>
 
-  <!-- English -->
   <div id="content-en" style="display: none;">
     <h2>1. General Information</h2>
     <p>The Psychiatryk website offers content and files for entertainment and educational purposes. Using the site means accepting this policy.</p>
