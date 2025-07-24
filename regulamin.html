@@ -45,7 +45,7 @@
     body {
       font-family: Arial, sans-serif;
       margin: 30px;
-      padding-top: 120px;
+      padding-top: 30px;
       background-color: #121212;
       color: #fff;
       line-height: 1.7;
@@ -99,14 +99,9 @@
     }
 
     .logo-link {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
+      position: relative;
+      margin-bottom: 20px;
       cursor: pointer;
-      transform: translateZ(0);
-      backface-visibility: hidden;
-      will-change: transform;
     }
 
     .logo-link img {
@@ -127,28 +122,20 @@
     }
 
     @media (max-width: 600px) {
-      h1 {
-        font-size: 26px;
-      }
-
-      h2 {
-        font-size: 20px;
-      }
-
-      body {
-        padding-top: 80px;
-      }
+      h1 { font-size: 26px; }
+      h2 { font-size: 20px; }
+      body { padding-top: 20px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="logo-link" onclick="redirectLogo()">
-    <img src="grafiki/logo.png" alt="Logo Psychiatryk" class="logo-top">
-  </div>
-
   <div class="lang-switch">
     <button id="lang-button" onclick="toggleLanguage()">🌐 Zmień język (EN)</button>
+  </div>
+
+  <div class="logo-link" onclick="redirectLogo()">
+    <img src="grafiki/logo.png" alt="Logo Psychiatryk">
   </div>
 
   <h1 id="header">📜 Regulamin korzystania ze strony Psychiatryk</h1>
